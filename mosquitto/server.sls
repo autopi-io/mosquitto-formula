@@ -22,4 +22,11 @@ mosquitto_service:
   - watch:
     - file: /etc/mosquitto/mosquitto.conf
 
+{%- else %}
+
+mosquitto_service:
+  service.dead:
+  - enable: false
+  - name: {{ server.service }}
+
 {%- endif %}
