@@ -15,6 +15,19 @@ mosquitto_packages:
   - require:
     - pkg: mosquitto_packages
 
+{%- if server.config is defined %}
+{%- for key in server.config.keys() %}
+/etc/mosquitto/conf.d/{{ key }}.conf:
+  file.managed:
+    - contents_pillar: "mosquitto:server:config:{{ key }}"
+    - user: root
+    - group: root
+    - mode: 644
+    - watch_in:
+      - service: mosquitto_service
+{%- endfor %}
+{%- endif %}
+
 mosquitto_service:
   service.running:
   - enable: true
