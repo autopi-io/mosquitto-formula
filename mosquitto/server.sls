@@ -39,11 +39,10 @@ mosquitto_config_file:
   - source: salt://mosquitto/files/mosquitto.conf
   {%- endif %}
   - template: jinja
+  - makedirs: true
   - user: root
   - group: root
   - mode: 644
-  # - require:
-  #   - pkg: mosquitto_packages
 
 mosquitto_packages:
   pkg.installed:
