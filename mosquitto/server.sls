@@ -55,6 +55,14 @@ mosquitto_packages:
   - require:
     - file: mosquitto_config_file
 
+mosquitto-service-timeoutstopsec-configured:
+  file.managed:
+    - name: /etc/systemd/system/mosquitto.service.d/01-set-timeoutstopsec.conf
+    - source: salt://mosquitto/files/01-set-timeoutstopsec.conf
+    - makedirs: true
+    - require:
+      - pkg: mosquitto_packages
+
 {%- if server.config is defined %}
 {%- for key in server.config.keys() %}
 /etc/mosquitto/conf.d/{{ key }}.conf:
