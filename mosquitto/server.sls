@@ -90,4 +90,13 @@ mosquitto_service:
   - enable: false
   - name: {{ server.service }}
 
+mosquitto-config-removed:
+  file.absent:
+    - name: /etc/mosquitto/mosquitto.conf
+
+mosquitto-confd-cleared:
+   file.directory:
+      - name: /etc/mosquitto/conf.d/         
+      - clean: True
+
 {%- endif %}
