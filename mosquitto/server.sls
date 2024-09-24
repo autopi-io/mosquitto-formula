@@ -98,5 +98,6 @@ mosquitto-confd-cleared:
    file.directory:
       - name: /etc/mosquitto/conf.d/         
       - clean: True
+      - onlyif: test -d /etc/mosquitto/conf.d/
 
 {%- endif %}
